@@ -1,0 +1,6 @@
+c:\users\stu\documents\visual studio 2013\Projects\SubtitlesToClassNotes\SubtitlesToClassNotes\bin\Debug\SubtitlesToClassNotes.exe.config
+c:\users\stu\documents\visual studio 2013\Projects\SubtitlesToClassNotes\SubtitlesToClassNotes\bin\Debug\SubtitlesToClassNotes.exe
+c:\users\stu\documents\visual studio 2013\Projects\SubtitlesToClassNotes\SubtitlesToClassNotes\bin\Debug\SubtitlesToClassNotes.pdb
+c:\users\stu\documents\visual studio 2013\Projects\SubtitlesToClassNotes\SubtitlesToClassNotes\obj\Debug\SubtitlesToClassNotes.csprojResolveAssemblyReference.cache
+c:\users\stu\documents\visual studio 2013\Projects\SubtitlesToClassNotes\SubtitlesToClassNotes\obj\Debug\SubtitlesToClassNotes.exe
+c:\users\stu\documents\visual studio 2013\Projects\SubtitlesToClassNotes\SubtitlesToClassNotes\obj\Debug\SubtitlesToClassNotes.pdb
