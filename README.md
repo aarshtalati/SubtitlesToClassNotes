@@ -1,5 +1,20 @@
 # SubtitlesToClassNotes
 Converts standard subtitle files for each chapter of each lesson into a single text file
+##Motivation##
+
+So, I was looking at some online course, which come with subtitles. The website had a straighforward way to download the course video files and subtitle files (*.srt).
+
+I noticed that ...
+
+1. I was spending too much time in just typing what was being spoken to take my notes so now I can simply copy-paste 
+2. Sometimes had to shuffle to multiple videos if I was looking for something in particular to refresh my memory so now I can open the text file and simply search to pin point the corresponding video clip in the course videos
+
+ 
+
+Another positive side effect is it let's the student set the offsets of subtitles ( I actually, developed this capability to fine tune a French movie I was  watching and the only English subtitle were little off from what was being spoken )
+
+## Assumption ##
+The srt file follows the standard format.
 
 ##Mac##
 
