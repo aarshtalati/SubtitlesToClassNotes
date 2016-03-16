@@ -36,9 +36,9 @@ namespace SubtitlesToClassNotes
 			di = new DirectoryInfo(basePath);
 
 			// Get a reference to each directory in that directory.
-			diArr = di.GetDirectories().OrderBy(x=>x.Name).ToArray();
+			diArr = di.GetDirectories();
 
-			foreach (DirectoryInfo dri in diArr.Take(14))
+			foreach (DirectoryInfo dri in diArr)
 			{
 				Console.ForegroundColor = ConsoleColor.Cyan;
 				Console.WriteLine(dri.Name);
@@ -73,7 +73,7 @@ namespace SubtitlesToClassNotes
 										m.Groups["StartTime"].Value,
 										m.Groups["EndTime"].Value),
 									String.Format(
-										"" +
+										" " +
 										"",
 										sequence++,
 										DateTime.Parse(m.Groups["StartTime"].Value.Replace(",", "."))
