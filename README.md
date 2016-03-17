@@ -16,6 +16,38 @@ Another positive side effect is it let's the student set the offsets of subtitle
 ## Assumption ##
 The srt file follows the standard format.
 
+## Caveat ##
+Later it was found that not all srt files were formatted <a href="https://en.wikipedia.org/wiki/Timed_text#Example" target="_blank">exactly the same way</a>, and the program would not be able to match the pattern. Hence, more Regular Expressions were later added for other known variants.
+
+## Configurations ##
+<table style="text-align: left; width: 100%;" cellpadding="2"
+ cellspacing="2">
+  <tbody>
+    <tr>
+      <th>Variable</th>
+      <th>Function</th>
+    </tr>
+    <tr>
+      <td>basePath</td>
+      <td>Thisv is valid  root directory path string the where you've extracted your zip file containing subtitle dir and/or files</td>
+    </tr>
+    <tr>
+      <td>condensed</td>
+      <td>Could be True or False ( <a href="https://msdn.microsoft.com/en-us/library/c8f5xwh7.aspx?f=255&MSPPError=-2147217396" target="_blank">boolean</a> )</td>
+    </tr>
+    <tr>
+      <td>verboseLogging</td>
+      <td>Controls if you want to include tracing information related to Regualar Expressions ( <a href="https://msdn.microsoft.com/en-us/library/c8f5xwh7.aspx?f=255&MSPPError=-2147217396" target="_blank">boolean</a> )</td>
+    </tr>
+    <tr>
+      <td>ignoreWarnings</td>
+      <td>Controls if you want to surpress warnings related to Regualar Expressions ( <a href="https://msdn.microsoft.com/en-us/library/c8f5xwh7.aspx?f=255&MSPPError=-2147217396" target="_blank">boolean</a> )</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
 ##Using on Mac##
 
 I do not have a Mac to test with but I noted that the default .gitignore actually adds DNX related files to exception list.On the flip side, when I was going through ***[a great post,( you might want to skip to § 4 )](https://www.jeremymorgan.com/tutorials/vnext/how-to-build-c-sharp-on-mac-osx/)*** I noticed the Project.json ( which is what you might be looking for ) but looks like it's needed for ASP.NET application (ASP.NET is a platform in .NET for writing Web Applications) not the stand-alone C# console application which runs on desktop computer - but I could be wrong. ( The crossed out links below are related to ASP.NET )
