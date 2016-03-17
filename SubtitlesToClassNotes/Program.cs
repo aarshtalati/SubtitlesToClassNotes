@@ -14,7 +14,8 @@ namespace SubtitlesToClassNotes
 			// Configurations
 
 			string basePath = "C:\\Data\\sub";
-			bool condensed = true;
+			bool verboseLogging = true;
+			bool ignoreWarnings = false;
 
 			// Actual Program
 
@@ -30,7 +31,10 @@ namespace SubtitlesToClassNotes
 
 			StringBuilder stringBuilder = new StringBuilder();
 
-			Regex extractTextRegularExpression = new Regex(@"(?<Order>\d+)\r\n(?<StartTime>(\d\d:){2}\d\d,\d{3}) --> (?<EndTime>(\d\d:){2}\d\d,\d{3})\r\n(?<Sub>.+)(?=\r\n\r\n\d+|$)");
+			Regex extractTextRegularExpression1 = new Regex(@"(?<Order>\d+)\r\n(?<StartTime>(\d\d:){2}\d\d,\d{3}) --> (?<EndTime>(\d\d:){2}\d\d,\d{3})\r\n(?<Sub>.+)(?=\r\n\r\n\d+|$)");
+			Regex extractTextRegularExpression2 = new Regex(@"(?<Order>\d+)\n(?<StartTime>(\d\d:){2}\d\d,\d{3}) --> (?<EndTime>(\d\d:){2}\d\d,\d{3})\n(?<Sub>.+)\n\n");
+			Regex extractTextRegularExpression3 = new Regex(@"(?<StartTime>(\d\d:){2}\d\d,\d{3}),(?<EndTime>(\d\d:){2}\d\d,\d{3})\r\n(?<Sub>.+)\r\n\r");
+			Regex extractTextRegularExpression4 = new Regex(@"(?<StartTime>(\d{1,2}:){2}\d\d.\d{3}),(?<EndTime>(\d{1,2}:){2}\d\d.\d{3})(?<Sub>.+)");
 
 			// Make a reference to a directory.
 			di = new DirectoryInfo(basePath);
@@ -42,10 +46,16 @@ namespace SubtitlesToClassNotes
 			{
 				Console.ForegroundColor = ConsoleColor.Cyan;
 				Console.WriteLine(dri.Name);
-				stringBuilder.Append(Environment.NewLine + Environment.NewLine + Environment.NewLine + dri.Name + Environment.NewLine + Environment.NewLine + Environment.NewLine);
+				stringBuilder.Append(
+					Environment.NewLine + Environment.NewLine + Environment.NewLine +
+					dri.Name + Environment.NewLine +
+					String.Join("", Enumerable.Range(0, dri.Name.Length).Select(x => "=")) +
+					Environment.NewLine + Environment.NewLine + Environment.NewLine);
 				Console.ResetColor();
 
 				files = dri.GetFiles(searchPattern, SearchOption.TopDirectoryOnly);
+
+				string extractedContent = null;
 
 				foreach (var file in files)
 				{
@@ -56,7 +66,11 @@ namespace SubtitlesToClassNotes
 
 					Console.ForegroundColor = ConsoleColor.Green;
 					Console.Write("\t" + file.Name);
-					stringBuilder.Append(Environment.NewLine + Environment.NewLine + file.Name + Environment.NewLine + Environment.NewLine);
+					stringBuilder.Append(
+						Environment.NewLine + Environment.NewLine + Environment.NewLine +
+						file.Name + Environment.NewLine +
+						String.Join("", Enumerable.Range(0, file.Name.Length).Select(x => ".")) +
+						Environment.NewLine + Environment.NewLine + Environment.NewLine);
 					Console.ResetColor();
 
 					try
@@ -65,30 +79,101 @@ namespace SubtitlesToClassNotes
 						{
 							srtLines = sr.ReadToEnd();
 
-							string extractedContent = extractTextRegularExpression.Replace(srtLines, delegate(Match m)
+							if (extractTextRegularExpression1.IsMatch(srtLines))
 							{
-								return m.Value.Replace(
-									String.Format("{0}\r\n{1} --> {2}\r\n",
-										m.Groups["Order"].Value,
-										m.Groups["StartTime"].Value,
-										m.Groups["EndTime"].Value),
-									String.Format(
-										" " +
-										"",
-										sequence++,
-										DateTime.Parse(m.Groups["StartTime"].Value.Replace(",", "."))
-												.AddSeconds(offset),
-										DateTime.Parse(m.Groups["EndTime"].Value.Replace(",", "."))
-												.AddSeconds(offset)));
-							});
+								if (verboseLogging)
+								{
+									stringBuilder.Append(" ( ~~~ 1 ~~~ ) ");
+								}
 
-							if(condensed)
-							{
-								extractedContent = extractedContent.Replace("\n", "").Replace("\r", "");
+								extractedContent = extractTextRegularExpression1.Replace(srtLines, delegate(Match m)
+								{
+									return m.Value.Replace(
+											String.Format("{0}\r\n{1} --> {2}\r\n",
+											m.Groups["Order"].Value,
+											m.Groups["StartTime"].Value,
+											m.Groups["EndTime"].Value),
+
+										" ");
+								});
 							}
 
+							else if (extractTextRegularExpression2.IsMatch(srtLines))
+							{
+								if (verboseLogging)
+								{
+									stringBuilder.Append(" ( ~~~ 2 ~~~ ) ");
+								}
+
+								extractedContent = extractTextRegularExpression2.Replace(srtLines, delegate(Match m)
+								{
+									return m.Value.Replace(
+											String.Format("{0}\n{1} --> {2}\n",
+											m.Groups["Order"].Value,
+											m.Groups["StartTime"].Value,
+											m.Groups["EndTime"].Value),
+											" ").Replace(
+											String.Format("{0}{1} --> {2}\n",
+											m.Groups["Order"].Value,
+											m.Groups["StartTime"].Value,
+											m.Groups["EndTime"].Value),
+											" ")
+											.Replace(
+											String.Format("{0}{1} --> {2}",
+											m.Groups["Order"].Value,
+											m.Groups["StartTime"].Value,
+											m.Groups["EndTime"].Value),
+											" ");
+								});
+							}
+
+							else if (extractTextRegularExpression3.IsMatch(srtLines))
+							{
+								if (verboseLogging)
+								{
+									stringBuilder.Append(" ( ~~~ 3 ~~~ ) ");
+								}
+
+								extractedContent = extractTextRegularExpression3.Replace(srtLines, delegate(Match m)
+								{
+									return m.Value.Replace(
+											String.Format("{0},{1}\r\n",
+											m.Groups["StartTime"].Value,
+											m.Groups["EndTime"].Value),
+											" ");
+								});
+							}
+
+							else if (extractTextRegularExpression4.IsMatch(srtLines))
+							{
+								if (verboseLogging)
+								{
+									stringBuilder.Append(" ( ~~~ 4 ~~~ ) ");
+								}
+
+								extractedContent = extractTextRegularExpression4.Replace(srtLines, delegate(Match m)
+								{
+									return m.Value.Replace(
+											String.Format("{0},{1}",
+											m.Groups["StartTime"].Value,
+											m.Groups["EndTime"].Value),
+											" ");
+								});
+							}
+
+							else
+							{
+								if (!ignoreWarnings)
+								{
+									stringBuilder.Append(" ( ~~~ WARNING : POSSIBLE UNKNOWN PATTERN DETECTION ~~~ ) ");
+								}
+								stringBuilder.Append(srtLines);
+							}
+
+							extractedContent = extractedContent.Replace("\n", "").Replace("\r", "");
+
 							stringBuilder.Append(extractedContent);
-							
+							extractedContent = "";
 						}
 					}
 					catch (Exception e)
