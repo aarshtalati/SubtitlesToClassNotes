@@ -43,6 +43,10 @@ Later it was found that not all srt files were formatted <a href="https://en.wik
       <td>ignoreWarnings</td>
       <td>Controls if you want to surpress warnings related to Regualar Expressions ( <a href="https://msdn.microsoft.com/en-us/library/c8f5xwh7.aspx?f=255&MSPPError=-2147217396" target="_blank">boolean</a> )</td>
     </tr>
+    <tr>
+      <td>sortDirectoryNames</td>
+      <td>Controls if you want to sort sub directories based on a delimeter ( <a href="https://msdn.microsoft.com/en-us/library/c8f5xwh7.aspx?f=255&MSPPError=-2147217396" target="_blank">boolean</a> )</td>
+    </tr>
   </tbody>
 </table>
 
