@@ -11,11 +11,20 @@ namespace SubtitlesToClassNotes
 	{
 		static void Main(string[] args)
 		{
-			// Configurations
+			/* ~~~ Configuration Section Starts ~~~ */
 
 			string basePath = "C:\\Data\\sub";
 			bool verboseLogging = true;
 			bool ignoreWarnings = false;
+
+			// Please read the documentation for all references (where used and defined) 
+			// of the function SortDirNamesByDelimiter  for more details on following config values
+			bool sortDirectoryNames = false; // when in doubt, set to false
+
+
+			/* ~~~ Configuration Section Ends ~~~ */
+
+
 
 			// Actual Program
 
@@ -42,6 +51,18 @@ namespace SubtitlesToClassNotes
 			// Get a reference to each directory in that directory.
 			diArr = di.GetDirectories();
 
+			// Optinally, sort directory names in a chronological order
+			if (sortDirectoryNames)
+			{
+				// for the examples, I've used, the directory name contained 
+				// Lesson No. and Lesson Name separated by a dash (-)
+				// If the delimeter is different in your case (e.g. white space, period etc ) 
+				// then please feel free to chnage it
+
+				SortDirNamesByDelimiter('-', ref diArr);
+			}
+
+
 			foreach (DirectoryInfo dri in diArr)
 			{
 				Console.ForegroundColor = ConsoleColor.Cyan;
@@ -49,7 +70,7 @@ namespace SubtitlesToClassNotes
 				stringBuilder.Append(
 					Environment.NewLine + Environment.NewLine + Environment.NewLine +
 					dri.Name + Environment.NewLine +
-					String.Join("", Enumerable.Range(0, dri.Name.Length).Select(x => "=")) +
+					String.Join("", Enumerable.Range(0, dri.Name.Length*2).Select(x => "=")) +
 					Environment.NewLine + Environment.NewLine + Environment.NewLine);
 				Console.ResetColor();
 
@@ -69,7 +90,7 @@ namespace SubtitlesToClassNotes
 					stringBuilder.Append(
 						Environment.NewLine + Environment.NewLine + Environment.NewLine +
 						file.Name + Environment.NewLine +
-						String.Join("", Enumerable.Range(0, file.Name.Length).Select(x => ".")) +
+						String.Join("", Enumerable.Range(0, file.Name.Length*2).Select(x => ".")) +
 						Environment.NewLine + Environment.NewLine + Environment.NewLine);
 					Console.ResetColor();
 
@@ -186,6 +207,28 @@ namespace SubtitlesToClassNotes
 				}
 			}
 			File.WriteAllText(basePath + "\\Notes.txt", stringBuilder.ToString());
+		}
+
+		/// <summary>
+		/// 
+		/// Often times the subdirectories' name are like this "1 - Introduction" 
+		/// In such instances the names would be sorted in alphabetical order rather, numeric order
+		/// 
+		/// This function takes a delimeter character and trys to fix this issue, 
+		/// so that the final output prints the subtitles in a chronological order
+		/// 
+		/// </summary>
+		/// <param name="delimiter"></param>
+		/// <param name="diArr"></param>
+		/// <returns></returns>
+		private static DirectoryInfo[] SortDirNamesByDelimiter(char delimiter, ref DirectoryInfo[] diArr)
+		{
+			diArr = (from d in diArr
+					 let splits = d.Name.Split('-')
+					 let index = float.Parse(splits[0].Replace(" ", ""))
+					 orderby index
+					 select d).ToArray<DirectoryInfo>();
+			return diArr;
 		}
 	}
 }
