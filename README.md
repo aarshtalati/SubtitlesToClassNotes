@@ -50,7 +50,9 @@ Later it was found that not all srt files were formatted <a href="https://en.wik
   </tbody>
 </table>
 
+##Installation##
 
+*I intend to make it easier with Docker in near future.* *.NET runs on Mac, Windows and Linux* ... Even though I've used OpenSuSE since 11.1, (I happen to use only Ubuntu for .NET with mono). So not sure about your options , i.e. *Mono on your Linux or "wine"*. This link might help you out: http://bit.ly/23XqxkY. Also you are welcome to contribute installation instructions for your Linux distro, on the GitHub repo. *On Windows 7+*, please install "Visual Studio Community 2015" for development/debugging and .NET 4.5.2 just to run the program. *For Mac* please see Documentation page: http://bit.ly/1T10uxU
 
 ##Using on Mac##
 
