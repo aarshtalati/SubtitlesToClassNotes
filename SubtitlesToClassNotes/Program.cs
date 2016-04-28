@@ -13,13 +13,13 @@ namespace SubtitlesToClassNotes
 		{
 			/* ~~~ Configuration Section Starts ~~~ */
 
-			string basePath = "C:\\Data\\sub";
-			bool verboseLogging = true;
+			string basePath = @"C:\Data\CN";
+			bool verboseLogging = false;
 			bool ignoreWarnings = false;
 
 			// Please read the documentation for all references (where used and defined) 
 			// of the function SortDirNamesByDelimiter  for more details on following config values
-			bool sortDirectoryNames = false; // when in doubt, set to false
+			bool sortDirectoryNames = true; // when in doubt, set to false
 
 
 			/* ~~~ Configuration Section Ends ~~~ */
@@ -70,7 +70,7 @@ namespace SubtitlesToClassNotes
 				stringBuilder.Append(
 					Environment.NewLine + Environment.NewLine + Environment.NewLine +
 					dri.Name + Environment.NewLine +
-					String.Join("", Enumerable.Range(0, dri.Name.Length*2).Select(x => "=")) +
+					String.Join("", Enumerable.Range(0, dri.Name.Length * 2).Select(x => "=")) +
 					Environment.NewLine + Environment.NewLine + Environment.NewLine);
 				Console.ResetColor();
 
@@ -90,7 +90,7 @@ namespace SubtitlesToClassNotes
 					stringBuilder.Append(
 						Environment.NewLine + Environment.NewLine + Environment.NewLine +
 						file.Name + Environment.NewLine +
-						String.Join("", Enumerable.Range(0, file.Name.Length*2).Select(x => ".")) +
+						String.Join("", Enumerable.Range(0, file.Name.Length * 2).Select(x => ".")) +
 						Environment.NewLine + Environment.NewLine + Environment.NewLine);
 					Console.ResetColor();
 
@@ -206,6 +206,9 @@ namespace SubtitlesToClassNotes
 					Console.WriteLine("... Done");
 				}
 			}
+
+			stringBuilder = stringBuilder.Replace(">>", "");
+
 			File.WriteAllText(basePath + "\\Notes.txt", stringBuilder.ToString());
 		}
 
