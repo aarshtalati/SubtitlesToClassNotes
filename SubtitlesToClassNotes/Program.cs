@@ -41,9 +41,10 @@ namespace SubtitlesToClassNotes
 			StringBuilder stringBuilder = new StringBuilder();
 
 			Regex extractTextRegularExpression1 = new Regex(@"(?<Order>\d+)\r\n(?<StartTime>(\d\d:){2}\d\d,\d{3}) --> (?<EndTime>(\d\d:){2}\d\d,\d{3})\r\n(?<Sub>.+)(?=\r\n\r\n\d+|$)");
-			Regex extractTextRegularExpression2 = new Regex(@"(?<Order>\d+)\n(?<StartTime>(\d\d:){2}\d\d,\d{3}) --> (?<EndTime>(\d\d:){2}\d\d,\d{3})\n(?<Sub>.+)\n\n");
-			Regex extractTextRegularExpression3 = new Regex(@"(?<StartTime>(\d\d:){2}\d\d,\d{3}),(?<EndTime>(\d\d:){2}\d\d,\d{3})\r\n(?<Sub>.+)\r\n\r");
-			Regex extractTextRegularExpression4 = new Regex(@"(?<StartTime>(\d{1,2}:){2}\d\d.\d{3}),(?<EndTime>(\d{1,2}:){2}\d\d.\d{3})(?<Sub>.+)");
+			Regex extractTextRegularExpression2 = new Regex(@"(?<Order>\d+)\n(?<StartTime>(\d\d:){2}\d\d,\d{3}) --> (?<EndTime>(\d\d:){2}\d\d,\d{3})\n(?<Sub>.+)\n");
+			Regex extractTextRegularExpression3 = new Regex(@"(?<Order>\d+)\n(?<StartTime>(\d\d:){2}\d\d,\d{3}) --> (?<EndTime>(\d\d:){2}\d\d,\d{3})\n(?<Sub>.+)\n\n");
+			Regex extractTextRegularExpression4 = new Regex(@"(?<StartTime>(\d\d:){2}\d\d,\d{3}),(?<EndTime>(\d\d:){2}\d\d,\d{3})\r\n(?<Sub>.+)\r\n\r");
+			Regex extractTextRegularExpression5 = new Regex(@"(?<StartTime>(\d{1,2}:){2}\d\d.\d{3}),(?<EndTime>(\d{1,2}:){2}\d\d.\d{3})(?<Sub>.+)");
 
 			// Make a reference to a directory.
 			di = new DirectoryInfo(basePath);
@@ -129,6 +130,24 @@ namespace SubtitlesToClassNotes
 								extractedContent = extractTextRegularExpression2.Replace(srtLines, delegate(Match m)
 								{
 									return m.Value.Replace(
+											String.Format("{0}\n{1} --> {2}",
+											m.Groups["Order"].Value,
+											m.Groups["StartTime"].Value,
+											m.Groups["EndTime"].Value),
+											"");
+								});
+							}
+
+							else if (extractTextRegularExpression3.IsMatch(srtLines))
+							{
+								if (verboseLogging)
+								{
+									stringBuilder.Append(" ( ~~~ 3 ~~~ ) ");
+								}
+
+								extractedContent = extractTextRegularExpression3.Replace(srtLines, delegate(Match m)
+								{
+									return m.Value.Replace(
 											String.Format("{0}\n{1} --> {2}\n",
 											m.Groups["Order"].Value,
 											m.Groups["StartTime"].Value,
@@ -148,14 +167,14 @@ namespace SubtitlesToClassNotes
 								});
 							}
 
-							else if (extractTextRegularExpression3.IsMatch(srtLines))
+							else if (extractTextRegularExpression4.IsMatch(srtLines))
 							{
 								if (verboseLogging)
 								{
-									stringBuilder.Append(" ( ~~~ 3 ~~~ ) ");
+									stringBuilder.Append(" ( ~~~ 4 ~~~ ) ");
 								}
 
-								extractedContent = extractTextRegularExpression3.Replace(srtLines, delegate(Match m)
+								extractedContent = extractTextRegularExpression4.Replace(srtLines, delegate(Match m)
 								{
 									return m.Value.Replace(
 											String.Format("{0},{1}\r\n",
@@ -165,14 +184,14 @@ namespace SubtitlesToClassNotes
 								});
 							}
 
-							else if (extractTextRegularExpression4.IsMatch(srtLines))
+							else if (extractTextRegularExpression5.IsMatch(srtLines))
 							{
 								if (verboseLogging)
 								{
-									stringBuilder.Append(" ( ~~~ 4 ~~~ ) ");
+									stringBuilder.Append(" ( ~~~ 5 ~~~ ) ");
 								}
 
-								extractedContent = extractTextRegularExpression4.Replace(srtLines, delegate(Match m)
+								extractedContent = extractTextRegularExpression5.Replace(srtLines, delegate(Match m)
 								{
 									return m.Value.Replace(
 											String.Format("{0},{1}",
@@ -191,7 +210,7 @@ namespace SubtitlesToClassNotes
 								stringBuilder.Append(srtLines);
 							}
 
-							extractedContent = extractedContent.Replace("\n", "").Replace("\r", "");
+							extractedContent = extractedContent.Replace("\n", " ").Replace("\r", " ").Replace("   ", " ").Replace("  ", " ");
 
 							stringBuilder.Append(extractedContent);
 							extractedContent = "";
