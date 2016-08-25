@@ -1,4 +1,4 @@
-# Subtitles To ClassNotes
+# Subtitles To ClassNotes #
 Converts standard subtitle files for each chapter of each lesson into a single text file
 ## <u>Motivation</u> ##
 
