@@ -54,7 +54,7 @@ Later it was found that not all srt files were formatted <a href="https://en.wik
 
 ## <u>Installation</u> ##
 
-**Please follow the on screen instructions on : https://www.microsoft.com/net/core**
+**If you are interested in .NET Core, please follow the on screen instructions on : https://www.microsoft.com/net/core**
 
 Once done, installating, open Visual Studio or Mono and open project <b>File</b> &gt; <b>Open Project</b> or equivelant in Mono. If you do not know how to do, a simple internet search might help you.
 
