@@ -56,15 +56,13 @@ Later it was found that not all srt files were formatted <a href="https://en.wik
 
 **Please follow the on screen instructions on : https://www.microsoft.com/net/core**
 
-*I intend to make it easier with Docker in near future.* *.NET runs on Mac, Windows and Linux* ...  *On Windows 7+*, please install "Visual Studio Community 2015" for development/debugging and .NET 4.5.2 just to run the program. *For Mac* please see Documentation page: http://bit.ly/1T10uxU
-
+Once done, installating, open Visual Studio or Mono and open project <b>File</b> &gt; <b>Open Project</b> or equivelant in Mono. If you do not know how to do, a simple internet search might help you.
 
 
 ## Windows (XP, 7, 8, 10) ##
 If you do not have Visual Studio, you can download the latest [2015](https://beta.visualstudio.com/vs/community/), or [2013](https://www.visualstudio.com/en-us/news/vs2013-community-vs.aspx) version. The installation can not be easier, just make sure your device meets [system requirements](https://www.visualstudio.com/en-us/downloads/visual-studio-2015-system-requirements-vs.aspx#1). 
 
 The installation being pretty easy and sleek, most don't need help, but if you run into issues or need help, check out [installation instructions here](https://msdn.microsoft.com/library/e2h7fzkw.aspx). If you've been living under a rock, and still use the obsolete Windows XP, downlaod the free Visual Studio Express Edition, called "Express for Desktop" from [here](https://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx), now if you're also using an itty-bitty monitor, you might want to scroll down, just a little. 
-
 
 
 ## Linux ##
