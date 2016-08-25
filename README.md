@@ -1,6 +1,6 @@
 # Subtitles To ClassNotes
 Converts standard subtitle files for each chapter of each lesson into a single text file
-##Motivation##
+## <u>Motivation</u> ##
 
 So, I was looking at some online course, which come with subtitles. The website had a straighforward way to download the course video files and subtitle files (*.srt).
 
@@ -13,13 +13,13 @@ I noticed that ...
 
 Another positive side effect is it let's the student set the offsets of subtitles ( I actually, developed this capability to fine tune a French movie I was  watching and the only English subtitle were little off from what was being spoken )
 
-## Assumption ##
+## <u>Assumption</u> ##
 The srt file follows the standard format.
 
-## Caveat ##
+## <u>Caveat</u> ##
 Later it was found that not all srt files were formatted <a href="https://en.wikipedia.org/wiki/Timed_text#Example" target="_blank">exactly the same way</a>, and the program would not be able to match the pattern. Hence, more Regular Expressions were later added for other known variants.
 
-## Configurations ##
+## <u>Configurations</u> ##
 <table style="text-align: left; width: 100%;" cellpadding="2"
  cellspacing="2">
   <tbody>
@@ -50,13 +50,33 @@ Later it was found that not all srt files were formatted <a href="https://en.wik
   </tbody>
 </table>
 
-##Installation##
+
+
+## <u>Installation</u> ##
 
 **Please follow the on screen instructions on : https://www.microsoft.com/net/core**
 
-*I intend to make it easier with Docker in near future.* *.NET runs on Mac, Windows and Linux* ... Even though I've used OpenSuSE since 11.1, (I happen to use only Ubuntu for .NET with mono). So not sure about your options , i.e. *Mono on your Linux or "wine"*. This link might help you out: http://bit.ly/23XqxkY. Also you are welcome to contribute installation instructions for your Linux distro, on the GitHub repo. *On Windows 7+*, please install "Visual Studio Community 2015" for development/debugging and .NET 4.5.2 just to run the program. *For Mac* please see Documentation page: http://bit.ly/1T10uxU
+*I intend to make it easier with Docker in near future.* *.NET runs on Mac, Windows and Linux* ...  *On Windows 7+*, please install "Visual Studio Community 2015" for development/debugging and .NET 4.5.2 just to run the program. *For Mac* please see Documentation page: http://bit.ly/1T10uxU
 
-##Using on Mac##
+
+
+## Windows (XP, 7, 8, 10) ##
+If you do not have Visual Studio, you can download the latest [2015](https://beta.visualstudio.com/vs/community/), or [2013](https://www.visualstudio.com/en-us/news/vs2013-community-vs.aspx) version. The installation can not be easier, just make sure your device meets [system requirements](https://www.visualstudio.com/en-us/downloads/visual-studio-2015-system-requirements-vs.aspx#1). 
+
+The installation being pretty easy and sleek, most don't need help, but if you run into issues or need help, check out [installation instructions here](https://msdn.microsoft.com/library/e2h7fzkw.aspx). If you've been living under a rock, and still use the obsolete Windows XP, downlaod the free Visual Studio Express Edition, called "Express for Desktop" from [here](https://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx), now if you're also using an itty-bitty monitor, you might want to scroll down, just a little. 
+
+
+
+## Linux ##
+
+### Ubuntu, SuSE ###
+Even though I've used OpenSuSE since 11.1, (I happen to use only Ubuntu for .NET with mono). So not sure about your options , i.e. *Mono on your Linux or "wine"*. [This link](http://bit.ly/23XqxkY/) might help you out. Also you are welcome to contribute installation instructions for your Linux distro, here.
+
+In SuSE, YaST might already have Mono in the repositories. I belive Ubuntu would also have straighforward procedure. Please visit: [http://www.mono-project.com/docs/getting-started/install/linux/](http://www.mono-project.com/docs/getting-started/install/linux/) for more.
+
+
+
+## Apple/Mac ##
 
 I do not have a Mac to test with but I noted that the default .gitignore actually adds DNX related files to exception list.On the flip side, when I was going through ***[a great post,( you might want to skip to § 4 )](https://www.jeremymorgan.com/tutorials/vnext/how-to-build-c-sharp-on-mac-osx/)*** I noticed the Project.json ( which is what you might be looking for ) but looks like it's needed for ASP.NET application (ASP.NET is a platform in .NET for writing Web Applications) not the stand-alone C# console application which runs on desktop computer - but I could be wrong. ( The crossed out links below are related to ASP.NET )
 
