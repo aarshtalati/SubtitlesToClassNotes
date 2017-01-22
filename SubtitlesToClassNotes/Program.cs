@@ -217,7 +217,12 @@ namespace SubtitlesToClassNotes
                                 stringBuilder.Append(srtLines);
                             }
 
-                            extractedContent = extractedContent.Replace("\n", " ").Replace("\r", " ").Replace("   ", " ").Replace("  ", " ");
+                            extractedContent = extractedContent
+                                                .Replace("\n", " ")
+                                                .Replace("\r", " ")
+                                                .Replace("   ", " ")
+                                                .Replace("  ", " ")
+                                                .Trim();
 
                             stringBuilder.Append(extractedContent);
                             extractedContent = "";
