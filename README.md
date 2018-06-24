@@ -57,6 +57,8 @@ Later it was found that not all srt files were formatted <a href="https://en.wik
 
 In v2.0 release, this application converted to .NET Core from .NET Framework. The legacy code is no longer actively being maintained. [v1.0](https://github.com/ablaze8/SubtitlesToClassNotes/releases) can be accessed from release tab or from [legacy](https://github.com/ablaze8/SubtitlesToClassNotes/tree/legacy) branch.
 
+To install .NET core, go to https://www.microsoft.com/net/learn/get-started/
+
 Commands:
 
 `$ git clone https://github.com/ablaze8/SubtitlesToClassNotes.git`
