@@ -2,7 +2,7 @@ title: Subtitles To ClassNotes
 description: Converts standard subtitle files for each chapter of each lesson into a single text file
 google_analytics: 
 show_downloads: true
-theme: jekyll-theme-cayman
+theme: jekyll-theme-architect
 
 gems:
   - jekyll-mentions
