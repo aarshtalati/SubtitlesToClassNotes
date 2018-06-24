@@ -1,5 +1,6 @@
 # Subtitles To ClassNotes #
-Converts standard subtitle files for each chapter of each lesson into a single text file
+Converts standard subtitle files for each chapter of each lesson into a single text file. Version 2 just got released! [What's new?](https://github.com/ablaze8/SubtitlesToClassNotes/releases/tag/v2.0)
+
 ## <u>Motivation</u> ##
 
 So, I was looking at some online course, which come with subtitles. The website had a straighforward way to download the course video files and subtitle files (*.srt).
@@ -54,48 +55,14 @@ Later it was found that not all srt files were formatted <a href="https://en.wik
 
 ## <u>Installation</u> ##
 
-**If you are interested in .NET Core, please follow the on screen instructions on : https://www.microsoft.com/net/core**
+In v2.0 release, this application converted to .NET Core from .NET Framework. The legacy code is no longer actively being maintained. [v1.0](https://github.com/ablaze8/SubtitlesToClassNotes/releases) can be accessed from release tab or from [legacy](https://github.com/ablaze8/SubtitlesToClassNotes/tree/legacy) branch.
 
-Once done, installating, open Visual Studio or Mono and open project <b>File</b> &gt; <b>Open Project</b> or equivelant in Mono. If you do not know how to do, a simple internet search might help you.
+Commands:
 
+`$ git clone https://github.com/ablaze8/SubtitlesToClassNotes.git`
 
-## Windows (XP, 7, 8, 10) ##
-If you do not have Visual Studio, you can download the latest [2015](https://beta.visualstudio.com/vs/community/), or [2013](https://www.visualstudio.com/en-us/news/vs2013-community-vs.aspx) version. The installation can not be easier, just make sure your device meets [system requirements](https://www.visualstudio.com/en-us/downloads/visual-studio-2015-system-requirements-vs.aspx#1). 
+`$ cd SubtitlesToClassNotes`
 
-The installation being pretty easy and sleek, most don't need help, but if you run into issues or need help, check out [installation instructions here](https://msdn.microsoft.com/library/e2h7fzkw.aspx). If you've been living under a rock, and still use the obsolete Windows XP, downlaod the free Visual Studio Express Edition, called "Express for Desktop" from [here](https://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx), now if you're also using an itty-bitty monitor, you might want to scroll down, just a little. 
+`$ dotnet build`
 
-
-## Linux ##
-
-### Ubuntu, SuSE ###
-Even though I've used OpenSuSE since 11.1, (I happen to use only Ubuntu for .NET with mono). So not sure about your options , i.e. *Mono on your Linux or "wine"*. [This link](http://bit.ly/23XqxkY/) might help you out. Also you are welcome to contribute installation instructions for your Linux distro, here.
-
-In SuSE, YaST might already have Mono in the repositories. I belive Ubuntu would also have straighforward procedure. Please visit: [http://www.mono-project.com/docs/getting-started/install/linux/](http://www.mono-project.com/docs/getting-started/install/linux/) for more.
-
-
-
-## Apple/Mac ##
-
-I do not have a Mac to test with but I noted that the default .gitignore actually adds DNX related files to exception list.On the flip side, when I was going through ***[a great post,( you might want to skip to § 4 )](https://www.jeremymorgan.com/tutorials/vnext/how-to-build-c-sharp-on-mac-osx/)*** I noticed the Project.json ( which is what you might be looking for ) but looks like it's needed for ASP.NET application (ASP.NET is a platform in .NET for writing Web Applications) not the stand-alone C# console application which runs on desktop computer - but I could be wrong. ( The crossed out links below are related to ASP.NET )
-
-
-I'd honestly try to make arrangements to see if I can manage to test this app on Mac - but not in the position to be able to promise you. I did some research and following links seemed helpful :
-
-
-- [How to program C# on a Mac](https://www.youtube.com/watch?v=AHTY5QXbsn0)
-- [Mono Project](http://www.mono-project.com/) --> [Installation Page](http://www.mono-project.com/docs/getting-started/install/)
-- [Mono Develop](http://www.monodevelop.com/)
-- [Mono Debugging](http://code.visualstudio.com/Docs/editor/debugging#_mono-debugging)
-- <a href="http://yeoman.io/">Yeoman</a> - an application scaffolding tool, you can think of this as <strong>File</strong> &gt; <strong>New Project</strong> for VS Code
-- [http://code.visualstudio.com/docs/editor/setup](http://code.visualstudio.com/docs/editor/setup)
-
-
-
-- <del>http://www.infoq.com/news/2015/05/NET-Linux-Mac</del>
-- <del>https://channel9.msdn.com/events/Build/2015/3-670 seems a good video, skip to 14:30</del>
-- <del>https://www.youtube.com/watch?v=MnYKdqERGXs</del>
-- <del>http://docs.asp.net/en/latest/getting-started/installing-on-mac.html</del>
-- <del>http://i.imgur.com/4xvR2oC.png</del>
-
-
-I'm planning to make it easier by building a [Docker](http://www.docker.com/ "Docker Homepage") container to make it easier for y'all.
+`$ dotnet run`
