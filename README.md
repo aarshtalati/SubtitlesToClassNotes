@@ -30,7 +30,7 @@ Later it was found that not all srt files were formatted <a href="https://en.wik
     </tr>
     <tr>
       <td>basePath</td>
-      <td>Thisv is valid  root directory path string the where you've extracted your zip file containing subtitle dir and/or files</td>
+      <td>This is valid  root directory path string the where you've extracted your zip file containing subtitle dir and/or files</td>
     </tr>
     <tr>
       <td>condensed</td>
@@ -45,8 +45,8 @@ Later it was found that not all srt files were formatted <a href="https://en.wik
       <td>Controls if you want to surpress warnings related to Regualar Expressions ( <a href="https://msdn.microsoft.com/en-us/library/c8f5xwh7.aspx?f=255&MSPPError=-2147217396" target="_blank">boolean</a> )</td>
     </tr>
     <tr>
-      <td>sortDirectoryNames</td>
-      <td>Controls if you want to sort sub directories based on a delimeter ( <a href="https://msdn.microsoft.com/en-us/library/c8f5xwh7.aspx?f=255&MSPPError=-2147217396" target="_blank">boolean</a> )</td>
+      <td>outputFullFileName</td>
+      <td>Controls where to save output file (absolute path) Default: Notes.txt in present working dir</td>
     </tr>
   </tbody>
 </table>
