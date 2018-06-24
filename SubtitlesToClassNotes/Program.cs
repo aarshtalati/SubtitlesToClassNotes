@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -11,22 +13,14 @@ namespace SubtitlesToClassNotes
     {
         static void Main(string[] args)
         {
-            /* ~~~ Configuration Section Starts ~~~ */
+            /* ~~~ Application specific configurations start ~~~ */
 
-            string basePath = @"C:\Users\UGAT174\Documents\GT\ML4T\ml4t";
+            String basePath = @"/home/atalati/Documents/notes/HCI"; // change path accordingly
+            String outputFullFileName = basePath + "/Notes.txt";
             bool verboseLogging = false;
             bool ignoreWarnings = false;
 
-            // Please read the documentation for all references (where used and defined) 
-            // of the function SortDirNamesByDelimiter  for more details on following config values
-            bool sortDirectoryNames = true; // when in doubt, set to false
-
-
-            /* ~~~ Configuration Section Ends ~~~ */
-
-
-
-            // Actual Program
+            /* ~~~ Application specific configurations end ~~~ */
 
             string srtLines;
             string searchPattern = "*.srt";
@@ -49,49 +43,42 @@ namespace SubtitlesToClassNotes
             // Make a reference to a directory.
             di = new DirectoryInfo(basePath);
 
-            // Get a reference to each directory in that directory.
-            diArr = di.GetDirectories();
-
-            // Optionally, sort directory names in a chronological order
-            if (sortDirectoryNames)
+            if (di.GetFiles("*.srt").Count() > 0)
             {
-                // for the examples, I've used, the directory name contained 
-                // Lesson No. and Lesson Name separated by a dash (-)
-                // If the delimiter is different in your case (e.g. white space, period etc ) 
-                // then please feel free to change it
-
-                try
-                {
-                    SortDirNamesByDelimiter('-', ref diArr);
-                }
-                catch (Exception ex)
-                {
-                    // all folder names are not in conventional manner, nothing needs to be done in that case
-                }
+                diArr = new DirectoryInfo[] { di };
             }
+            else
+            {
 
+                // Get a reference to each directory in that directory.
+                diArr = di.GetDirectories();
+                diArr = diArr.AsEnumerable().OrderByAlphaNumeric(x => x.Name).ToArray();
+            }
 
             foreach (DirectoryInfo dri in diArr)
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine(dri.Name);
+                Console.WriteLine(dri.Name.ToUpper());
                 stringBuilder.Append(
-                    Environment.NewLine + Environment.NewLine + Environment.NewLine +
-                    dri.Name + Environment.NewLine +
-                    String.Join("", Enumerable.Range(0, dri.Name.Length * 2).Select(x => "=")) +
+                    Environment.NewLine + Environment.NewLine + Environment.NewLine + Environment.NewLine + Environment.NewLine +
+                    String.Join("", Enumerable.Range(0, dri.Name.Length).Select(x => "=")) +
+                     Environment.NewLine +
+                    dri.Name.ToUpperInvariant() + Environment.NewLine +
+                    String.Join("", Enumerable.Range(0, dri.Name.Length).Select(x => "=")) +
                     Environment.NewLine + Environment.NewLine + Environment.NewLine);
                 Console.ResetColor();
 
                 files = dri.GetFiles(searchPattern, SearchOption.TopDirectoryOnly);
+
+                files = files.AsEnumerable().OrderByAlphaNumeric(x => x.Name).ToArray();
 
                 string extractedContent = null;
 
                 foreach (var file in files)
                 {
                     // if you notice any offset in the speech and sub-titles, this should let you fix it
-
-                    int sequence = 1;
-                    double offset = 0;
+                    // int sequence = 1;
+                    // double offset = 0;
 
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write("\t" + file.Name);
@@ -115,7 +102,7 @@ namespace SubtitlesToClassNotes
                                     stringBuilder.Append(" ( ~~~ 1 ~~~ ) ");
                                 }
 
-                                extractedContent = extractTextRegularExpression1.Replace(srtLines, delegate(Match m)
+                                extractedContent = extractTextRegularExpression1.Replace(srtLines, delegate (Match m)
                                 {
                                     return m.Value.Replace(
                                             String.Format("{0}\r\n{1} --> {2}\r\n",
@@ -134,7 +121,7 @@ namespace SubtitlesToClassNotes
                                     stringBuilder.Append(" ( ~~~ 2 ~~~ ) ");
                                 }
 
-                                extractedContent = extractTextRegularExpression2.Replace(srtLines, delegate(Match m)
+                                extractedContent = extractTextRegularExpression2.Replace(srtLines, delegate (Match m)
                                 {
                                     return m.Value.Replace(
                                             String.Format("{0}\n{1} --> {2}",
@@ -152,7 +139,7 @@ namespace SubtitlesToClassNotes
                                     stringBuilder.Append(" ( ~~~ 3 ~~~ ) ");
                                 }
 
-                                extractedContent = extractTextRegularExpression3.Replace(srtLines, delegate(Match m)
+                                extractedContent = extractTextRegularExpression3.Replace(srtLines, delegate (Match m)
                                 {
                                     return m.Value.Replace(
                                             String.Format("{0}\n{1} --> {2}\n",
@@ -181,7 +168,7 @@ namespace SubtitlesToClassNotes
                                     stringBuilder.Append(" ( ~~~ 4 ~~~ ) ");
                                 }
 
-                                extractedContent = extractTextRegularExpression4.Replace(srtLines, delegate(Match m)
+                                extractedContent = extractTextRegularExpression4.Replace(srtLines, delegate (Match m)
                                 {
                                     return m.Value.Replace(
                                             String.Format("{0},{1}\r\n",
@@ -198,7 +185,7 @@ namespace SubtitlesToClassNotes
                                     stringBuilder.Append(" ( ~~~ 5 ~~~ ) ");
                                 }
 
-                                extractedContent = extractTextRegularExpression5.Replace(srtLines, delegate(Match m)
+                                extractedContent = extractTextRegularExpression5.Replace(srtLines, delegate (Match m)
                                 {
                                     return m.Value.Replace(
                                             String.Format("{0},{1}",
@@ -240,30 +227,18 @@ namespace SubtitlesToClassNotes
 
             stringBuilder = stringBuilder.Replace(">>", "");
 
-            File.WriteAllText(basePath + "\\Notes.txt", stringBuilder.ToString());
+            File.WriteAllText(outputFullFileName, stringBuilder.ToString());
         }
 
-        /// <summary>
-        /// 
-        /// Often times the subdirectories' name are like this "1 - Introduction" 
-        /// In such instances the names would be sorted in alphabetical order rather, numeric order
-        /// 
-        /// This function takes a delimiter character and tries to fix this issue, 
-        /// so that the final output prints the subtitles in a chronological order
-        /// 
-        /// </summary>
-        /// <param name="delimiter"></param>
-        /// <param name="diArr"></param>
-        /// <returns></returns>
-        private static DirectoryInfo[] SortDirNamesByDelimiter(char delimiter, ref DirectoryInfo[] diArr)
+    }
+
+    public static class extensions
+    {
+        // courtesy: https://stopbyte.com/t/how-to-make-natural-sort-order-in-c/68
+        public static IEnumerable<T> OrderByAlphaNumeric<T>(this IEnumerable<T> source, Func<T, string> selector)
         {
-            diArr = (from d in diArr
-                     //where d.Name.Any(c => char.IsDigit(c)) && d.Name.Contains("-")
-                     let splits = d.Name.Split('-')
-                     let index = float.Parse(splits[0].Replace(" ", ""))
-                     orderby index
-                     select d).ToArray<DirectoryInfo>();
-            return diArr;
+            int max = source.SelectMany(i => Regex.Matches(selector(i), @"\d+").Cast<Match>().Select(m => (int?)m.Value.Length)).Max() ?? 0;
+            return source.OrderBy(i => Regex.Replace(selector(i), @"\d+", m => m.Value.PadLeft(max, '0')));
         }
     }
 }
