@@ -56,13 +56,13 @@ Later it was found that not all srt files were formatted <a href="https://en.wik
 
 There are other branches, which use the full fledged .NET and run only with Visual Studio 2012 or later. If you are not using Visual Studio 2012+ or not familiar with .NET, .NET Core is your best bet. Just like Python and Java, .NET Core runs on Linux/Windows/Apple.
 
-### I highly recommand using the .NET Core instead the .NET branches for the easiest installation. Installation instructions could be found at: https://www.microsoft.com/net/core/
+##### I highly recommend using the .NET Core instead the .NET branches for the easiest installation. Installation instructions could be found at: https://www.microsoft.com/net/core/
 
 If you are familiar with .NET and know what you are doing, feel free to use other branches.
 
-#### Clone command:
+##### Clone command:
 `git clone -b dotNetCore --single-branch https://github.com/ablaze8/SubtitlesToClassNotes.git`
 
-### I highly recommand using Visul Studio Code to edit the code. It's free and runs on Linux/Windows/Apple. https://code.visualstudio.com/
+##### I highly recommend using Visul Studio Code to edit the code. It's free and runs on Linux/Windows/Apple. https://code.visualstudio.com/
 
-Open `Program.cs`, chnage `basePath` variable accordingly. VS Code might ask you to install C# extension and to restore packages - say yes. Reload your VS Code. Click the green "play" icon and a text file called "Notes.txt" should have created at the path you mentioned for `basePath` variable.
+Open `Program.cs`, change `basePath` variable accordingly. VS Code might ask you to install C# extension and to restore packages - say yes. Reload your VS Code. Click the green "play" icon and a text file called "Notes.txt" should have created at the path you mentioned for `basePath` variable.
