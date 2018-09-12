@@ -15,7 +15,7 @@ namespace SubtitlesToClassNotes
         {
             /* ~~~ Application specific configurations start ~~~ */
 
-            String basePath = @"/home/atalati/Documents/notes/HCI"; // change path accordingly
+            String basePath = @"/home/atalati/Documents/notes/1. Game Playing Subtitles"; // change path accordingly
             String outputFullFileName = basePath + "/Notes.txt";
             bool verboseLogging = false;
             bool ignoreWarnings = false;
@@ -34,7 +34,7 @@ namespace SubtitlesToClassNotes
 
             StringBuilder stringBuilder = new StringBuilder();
 
-            Regex extractTextRegularExpression1 = new Regex(@"(?<Order>\d+)\r\n(?<StartTime>(\d\d:){2}\d\d,\d{3}) --> (?<EndTime>(\d\d:){2}\d\d,\d{3})\r\n(?<Sub>.+)(?=\r\n\r\n\d+|$)");
+            Regex extractTextRegularExpression1 = new Regex(@"(?<Order>\d+)(\r\n)*(?<StartTime>(\d\d:){2}\d\d,\d{3}) --> (?<EndTime>(\d\d:){2}\d\d,\d{3})(\r\n)*");
             Regex extractTextRegularExpression2 = new Regex(@"(?<Order>\d+)\n(?<StartTime>(\d\d:){2}\d\d,\d{3}) --> (?<EndTime>(\d\d:){2}\d\d,\d{3})\n(?<Sub>.+)\n");
             Regex extractTextRegularExpression3 = new Regex(@"(?<Order>\d+)\n(?<StartTime>(\d\d:){2}\d\d,\d{3}) --> (?<EndTime>(\d\d:){2}\d\d,\d{3})\n(?<Sub>.+)\n\n");
             Regex extractTextRegularExpression4 = new Regex(@"(?<StartTime>(\d\d:){2}\d\d,\d{3}),(?<EndTime>(\d\d:){2}\d\d,\d{3})\r\n(?<Sub>.+)\r\n\r");
@@ -225,7 +225,7 @@ namespace SubtitlesToClassNotes
                 }
             }
 
-            stringBuilder = stringBuilder.Replace(">>", "");
+            stringBuilder = stringBuilder.Replace(">>", "").Replace("  ", " ").Replace("&gt;", "");
 
             File.WriteAllText(outputFullFileName, stringBuilder.ToString());
         }
