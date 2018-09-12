@@ -63,6 +63,6 @@ If you are familiar with .NET and know what you are doing, feel free to use othe
 ##### Clone command:
 `git clone -b dotNetCore --single-branch https://github.com/ablaze8/SubtitlesToClassNotes.git`
 
-##### I highly recommend using Visul Studio Code to edit the code. It's free and runs on Linux/Windows/Apple. https://code.visualstudio.com/
+##### I highly recommend using Visual Studio Code to edit the code. It's free and runs on Linux/Windows/Apple. https://code.visualstudio.com/
 
 Open `Program.cs`, change `basePath` variable accordingly. VS Code might ask you to install C# extension and to restore packages - say yes. Reload your VS Code. Click the green "play" icon and a text file called "Notes.txt" should have created at the path you mentioned for `basePath` variable.
